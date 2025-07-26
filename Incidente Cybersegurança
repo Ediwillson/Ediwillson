@@ -1,0 +1,64 @@
+# 🛡️ Relatório de Incidente de Cibersegurança #
+
+## 🏢 Situação
+
+Na empresa fictícia **“Botium Toys”**, o departamento pessoal relatou estar com dificuldades de realizar acesso no site `www.yummyrecipesforme.com`.  
+Dada essa situação, o caso foi encaminhado ao time de cibersegurança para analisar e constatar o erro.
+
+---
+
+## 📡 Análise de Tráfego de Rede
+
+Durante o uso da ferramenta `TCPDUMP`, foi gerado o seguinte relatório da comunicação com o site em questão:
+
+---
+
+## 📍 Parte 1: Resumo do problema encontrado nos registros de tráfego DNS e ICMP
+
+- **O protocolo UDP revela que:**  
+  Não foi possível realizar a entrega das solicitações para o IP de destino com a porta 53, retornando a informação de que a porta está inalcançável.
+
+- **Baseado nos resultados da análise de rede, foi observado que:**  
+  A resposta de eco ICMP retornou a seguinte mensagem de erro:  
+  `porta 53 inalcançável`.
+
+- **A porta mencionada na mensagem de erro é usada para:**  
+  Serviços de **DNS**.
+
+- **O problema mais provável é:**  
+  **Bloqueio de porta.**
+
+---
+
+## 🔍 Parte 2: Análise dos dados e fornecimento de causa provável do incidente
+
+- **Horário em que o incidente ocorreu:**  
+  Entre **13:24 até 13:28**.
+
+- **Como a equipe de TI tomou conhecimento do incidente:**  
+  Solicitação vinda do departamento pessoal via chamado, sinalizado pela gestão do setor.
+
+- **Ações tomadas pelo departamento de TI:**  
+  Ao ter conhecimento do caso, a equipe de TI fez uma análise dos pacotes enviados para o site `www.yummyrecipesforme.com` durante todo o período do dia em que o chamado foi aberto.  
+  Foi identificado que no período de **13:24 até 13:28**, o site estava indisponível pois o servidor DNS que utilizava a **porta 53** não estava operante.
+
+- **Causa provável do incidente:**  
+  O bloqueio ou a indisponibilidade da porta pode ter sido causado por:
+  - Bloqueio ativo do **firewall**, tentando conter algum tipo de ataque hacker, resultando em indisponibilidade temporária dos serviços de DNS.
+  - Uma **falha interna no servidor**.  
+    Como a indisponibilidade durou apenas 4 minutos e não se repetiu, esta é a hipótese mais provável.
+
+---
+
+## ✅ Parte 3: Considerações finais
+
+A situação-problema foi **pontual**.  
+Durante todo o restante do dia não houve outros incidentes semelhantes.  
+A causa mais provável foi um **erro interno do próprio site `www.yummyrecipesforme.com`**, já que em casos de ataque a indisponibilidade se espalharia para mais sites hospedados no mesmo servidor DNS e por um tempo maior.
+
+---
+
+## 👤 Responsável
+
+- 📧 **Email:** ediwillson.alencar@gmail.com  
+- 💼 **LinkedIn:** [ediwillson-pereira](https://www.linkedin.com/in/ediwillson-pereira)
